@@ -18,7 +18,7 @@
       stage('Sonar-Analysis') {
             steps {
                 sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
-                sh ''' mvn sonar:sonar  -Dsonar.url=http://51.20.103.155:9000/ -Dsonar.login=squ_e8239ce7e5cb9e67cf772fe8fa671e7ce9be8fb5  -Dsonar.projectName=Jenkins-Zero-To-Hero \
+                sh ''' mvn sonar:sonar  -Dsonar.url=http://51.20.103.155:9000/ -Dsonar.login=squ_e2dc889533bb95076575b6a3b31bc2c624a8db1c  -Dsonar.projectName=Jenkins-Zero-To-Hero \
                     -Dsonar.java.binaries=. \
                     -Dsonar.projectKey=Jenkins-Zero-To-Hero '''
             }
