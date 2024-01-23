@@ -27,7 +27,7 @@
             steps{
                  script{
                   
-                     sh 'docker run -d -p 8082:8082 --name abhishek abhishek:$BUILD_NUMBER '          
+                     sh 'docker run -d -p 8082:8080 --name abhishek abhishek:$BUILD_NUMBER '          
              }
            }
           }
