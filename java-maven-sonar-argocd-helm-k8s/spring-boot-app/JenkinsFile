@@ -15,5 +15,21 @@
         sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean install'
       }
     }
+     stage('Build docker image'){
+            steps{
+                script{
+                       sh 'docker build -t abhishek:$BUILD_NUMBER .'
+            }
+       }
+      }
+        
+      stage('Start image'){
+            steps{
+                 script{
+                  
+                     sh 'docker run -d -p 8082:8082 --name abhishek abhishek:$BUILD_NUMBER '          
+             }
+           }
+          }
 }
 }
