@@ -21,7 +21,7 @@
       }
       steps {
          script {
-           def scannerHome = tool 'sonarqube-scanner'
+           def scannerHome = tool 'sonar-scanner'
           withSonarQubeEnv('sonarqube') {
           sh "${scannerHome}/bin/sonar-scanner"
           sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=squ_84e6c077d3ac49a54c23a612cb5b2ba28da7da0f -Dsonar.host.url=${SONAR_URL}'
