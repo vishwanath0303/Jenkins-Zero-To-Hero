@@ -28,7 +28,7 @@
      stage('Build docker image'){
             steps{
                 script{
-                  sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app  && docker build -t abhishek:$BUILD_NUMBER .'
+                  sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app  && docker build -t vishwa:$BUILD_NUMBER .'
             }
        }
       }
@@ -37,7 +37,7 @@
             steps{
                  script{
                   
-                     sh 'docker run -d -p 8082:8080 --name abhishek abhishek:$BUILD_NUMBER '          
+                     sh 'docker run -d -p 8082:8080 --name vishwa vishwa:$BUILD_NUMBER '          
              }
            }
           }
