@@ -22,7 +22,7 @@
       steps {
          script {
           withSonarQubeEnv(credentialsId: 'sonarqube') {
-          sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+          sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=squ_84e6c077d3ac49a54c23a612cb5b2ba28da7da0f -Dsonar.host.url=${SONAR_URL}'
         }
         }
       }
