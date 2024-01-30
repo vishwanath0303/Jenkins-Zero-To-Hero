@@ -25,7 +25,7 @@
         }
       }
     }
-}
+
      stage('Build docker image'){
             steps{
                 script{
@@ -49,10 +49,11 @@
                 sh "docker tag vishwa:$BUILD_NUMBER ${env.dockerHubUser}/vishwa:$BUILD_NUMBER"
                 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
                 sh "docker push ${env.dockerHubUser}/vishwa:$BUILD_NUMBER"
-                }
+                
             }
-        }
-
+           }
+}
+ 
 
 }
 }
