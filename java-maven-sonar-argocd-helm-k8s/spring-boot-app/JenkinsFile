@@ -20,21 +20,12 @@
         SONAR_URL = "http://16.170.155.73:9000"
       }
       steps {
-         script {
-           withSonarQubeEnv('sonar-scanner') {
-            sh "${scannerHome}/bin/sonar-scanner"
-            sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=squ_84e6c077d3ac49a54c23a612cb5b2ba28da7da0f -Dsonar.host.url=${SONAR_URL}'
-        }
+        withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+          sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
         }
       }
+    }
 }
-       stage("Quality Gate") {
-            steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube'
-              }
-            }
-          }
      stage('Build docker image'){
             steps{
                 script{
