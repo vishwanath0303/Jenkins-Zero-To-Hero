@@ -17,11 +17,10 @@
     }
       stage('Static Code Analysis') {
       environment {
-        SONAR_URL = "http://51.20.121.48:9000"
+        SONAR_URL = "http://16.170.155.73:9000"
       }
       steps {
          script {
-           def scannerHome = tool 'sonarqube' ;
            withSonarQubeEnv('sonar-scanner') {
             sh "${scannerHome}/bin/sonar-scanner"
             sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=squ_84e6c077d3ac49a54c23a612cb5b2ba28da7da0f -Dsonar.host.url=${SONAR_URL}'
@@ -52,6 +51,16 @@
              }
            }
           }
+       stage("Push to Docker Hub"){
+            steps {
+                echo "Pushing the image to docker hub"
+                withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
+                sh "docker tag vishwa:$BUILD_NUMBER ${env.dockerHubUser}/vishwa:$BUILD_NUMBER"
+                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
+                sh "docker push ${env.dockerHubUser}/vishwa:$BUILD_NUMBER"
+                }
+            }
+        }
 
 
 }
